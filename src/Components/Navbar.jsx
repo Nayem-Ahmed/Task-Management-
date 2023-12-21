@@ -13,18 +13,18 @@ const Navbar = () => {
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>  <NavLink to='/'>Home</NavLink></li>   
-            <li>  <NavLink to='/'>Home</NavLink></li>   
-            <li>  <NavLink to='/'>Home</NavLink></li>   
+            <li>  <NavLink to='/about'>About</NavLink></li>   
+            <li>  <NavLink to='/services'>Services</NavLink></li>   
             
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a href='/' className=" text-xl font-semibold">Task Management</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li>  <NavLink to='/'>Home</NavLink></li>       
-            <li>  <NavLink to='/'>Home</NavLink></li>       
-            <li>  <NavLink to='/'>Home</NavLink></li>                   
+          <li>  <NavLink to='/'>Home</NavLink></li>   
+            <li>  <NavLink to='/about'>About</NavLink></li>   
+            <li>  <NavLink to='/services'>Services</NavLink></li>                    
           </ul>
         </div>
         <div className="navbar-end">
