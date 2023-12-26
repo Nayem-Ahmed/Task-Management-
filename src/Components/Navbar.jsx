@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Headroom from 'react-headroom';
 import { NavLink } from 'react-router-dom';
 import { FaRegUserCircle } from "react-icons/fa";
+import { AuthContext } from '../Provider/Authprovider';
 
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext)
   return (
     <Headroom>
       <div className="navbar bg-base-100">
@@ -28,10 +30,27 @@ const Navbar = () => {
             <li><NavLink to='/about'>About</NavLink></li>
             <li><NavLink to='/services'>Services</NavLink></li>
             <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+            <li><NavLink to='/signup'>Sign Up</NavLink></li>
+            {
+              user?.email ?
+                <li><a onClick={logOut}  >Logout</a></li>
+                :
+                <li><NavLink to='/login'>Login</NavLink></li>
+            }
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="text-3xl"><FaRegUserCircle></FaRegUserCircle></a>
+          {
+            user?.email ? <>
+              <span className='font-semibold'>{user.displayName}</span> 
+            </>
+              :
+              <>
+                <a className="text-3xl"><FaRegUserCircle></FaRegUserCircle></a>
+              </>
+
+
+          }
         </div>
       </div>
     </Headroom>

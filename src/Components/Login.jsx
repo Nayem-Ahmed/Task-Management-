@@ -2,18 +2,21 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Provider/Authprovider';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { signinUser } = useContext(AuthContext)
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
     // Handle form submission logic here
-    console.log('Form data submitted:', data);
     signinUser(data.email,data.password)
       .then((result) => {
-        console.log(result.user);
+        console.log("user",result.user);
         toast('Login Successful')
+        navigate(location?.state ? location.state : '/');
+        navigate('/')
       })
       .catch((error) => {
         console.error(error);

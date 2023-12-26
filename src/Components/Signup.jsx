@@ -4,33 +4,40 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../Provider/Authprovider';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { updateProfile } from 'firebase/auth';
 
 
 const Signup = () => {
-    const {signupUser} = useContext(AuthContext)
+    const { signupUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         // Handle form submission logic here
-        console.log('Form data submitted:', data);
-        signupUser(data.email,data.password)
-        .then((result)=>{
-            console.log(result.user);
-                toast('User create successful')
-                navigate('/')                
-        })
-        .catch((error)=>{
-            console.error(error);
-            toast(error.message);
+        signupUser(data.email, data.password)
+            .then((result) => {
+                console.log(result.user);
 
-        })
+                updateProfile(result.user,{
+                    displayName: data.firstName,
+                     
+                  })
+                  .then(()=> console.log('profile upload'))
+                  .catch()
+                toast('User create successful')
+                navigate('/')
+            })
+            .catch((error) => {
+                console.error(error);
+                toast(error.message);
+
+            })
     };
 
     return (
-        <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-            <div className="bg-white p-8 rounded shadow-md w-[500px]">
-                 
+        <div className="bg-gray-100 min-h-screen  flex items-center justify-center">
+            <div className="bg-white mt-6 p-8 rounded shadow-md w-[500px]">
+
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-600 mb-2">
                         Name
