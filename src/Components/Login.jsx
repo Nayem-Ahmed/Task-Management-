@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../Provider/Authprovider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+  const { signinUser } = useContext(AuthContext)
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
     // Handle form submission logic here
     console.log('Form data submitted:', data);
+    signinUser(data.email,data.password)
+      .then((result) => {
+        console.log(result.user);
+        toast('Login Successful')
+      })
+      .catch((error) => {
+        console.error(error);
+        toast('Envalid Password')
+      })
   };
 
   return (
@@ -14,17 +26,17 @@ const Login = () => {
       <div className="bg-white p-8 rounded shadow-md w-96 text-left">
         <h1 className="text-2xl font-bold mb-6">Login Form</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="username" className="block text-sm font-medium text-gray-600 mb-2">
-            Username
+          <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-2">
+            email
           </label>
           <input
-            id="username"
+            id="email"
             className="border border-gray-300 p-2 mb-4 w-full"
             type="text"
-            placeholder="Enter your username"
-            {...register("username", { required: true })}
+            placeholder="Enter your email"
+            {...register("email", { required: true })}
           />
-          {errors.username && <span className="text-red-500">Username is required</span>}
+          {errors.email && <span className="text-red-500">email is required</span>}
 
           <label htmlFor="password" className="block text-sm font-medium text-gray-600 mb-2">
             Password

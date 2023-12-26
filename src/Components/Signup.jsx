@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from '../Provider/Authprovider';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
+    const {signupUser} = useContext(AuthContext)
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         // Handle form submission logic here
         console.log('Form data submitted:', data);
+        signupUser(data.email,data.password)
+        .then((result)=>{
+            console.log(result.user);
+                toast('User create successful')
+                navigate('/')                
+        })
+        .catch((error)=>{
+            console.error(error);
+            toast(error.message);
+
+        })
     };
 
     return (
