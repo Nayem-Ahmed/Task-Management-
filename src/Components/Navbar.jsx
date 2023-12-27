@@ -42,6 +42,7 @@ const Navbar = () => {
         <div className="navbar-end">
           {
             user?.email ? <>
+              <img className='w-10 h-10 rounded-full' src={user.photoURL} alt="" />
               <span className='font-semibold'>{user.displayName}</span> 
             </>
               :

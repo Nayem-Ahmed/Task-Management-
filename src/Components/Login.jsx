@@ -4,10 +4,13 @@ import { AuthContext } from '../Provider/Authprovider';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const Login = () => {
   const { signinUser } = useContext(AuthContext)
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm();
+
 
   const onSubmit = (data) => {
     // Handle form submission logic here
@@ -30,7 +33,7 @@ const Login = () => {
         <h1 className="text-2xl font-bold mb-6">Login Form</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-2">
-            email
+            Email
           </label>
           <input
             id="email"
