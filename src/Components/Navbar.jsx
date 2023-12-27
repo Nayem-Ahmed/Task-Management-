@@ -19,10 +19,18 @@ const Navbar = () => {
               <li>  <NavLink to='/'>Home</NavLink></li>
               <li>  <NavLink to='/about'>About</NavLink></li>
               <li>  <NavLink to='/services'>Services</NavLink></li>
+              <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+              <li><NavLink to='/signup'>Sign Up</NavLink></li>
+              {
+                user?.email ?
+                  <li><a onClick={logOut}  >Logout</a></li>
+                  :
+                  <li><NavLink to='/login'>Login</NavLink></li>
+              }
 
             </ul>
           </div>
-          <a href='/' className=" text-xl font-semibold">Task Management</a>
+          <a href='/' className=" md:text-xl font-semibold">Task Management</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -43,7 +51,7 @@ const Navbar = () => {
           {
             user?.email ? <>
               <img className='w-10 h-10 rounded-full' src={user.photoURL} alt="" />
-              <span className='font-semibold'>{user.displayName}</span> 
+              <span className='font-semibold'>{user.displayName}</span>
             </>
               :
               <>
